@@ -1,0 +1,26 @@
+mybatis:
+  type-aliases-package: com.chatroom_websocket.pojo
+  mapper-locations: classpath:/mybatis/*.xml
+  configuration:
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/chatroom?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: simon
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 7
+    host: localhost
+    port: 6379
+    timeout: 2000
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
+  thymeleaf:
+    mode: HTML5
+    encoding: utf-8
+    cache: false

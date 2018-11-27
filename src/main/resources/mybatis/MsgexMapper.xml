@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace mapper接口 必填 随便填值 防止SQL语句ID重名-->
+<mapper namespace="com.chatroom_websocket.mapper.MsgexMapper">
+    <select id="getMsgexList" resultType="Msgex">
+        SELECT * FROM `MsgEx` msg,`User` u
+        WHERE msg.`mFrom`=u.`uid` AND (msg.mFrom=#{mFrom} AND msg.mTo=#{mTo})
+        OR (msg.mFrom=#{mTo} AND msg.mTo=#{mFrom}) GROUP BY msg.`mId`
+    </select>
+    <insert id="saveMsgex">
+        INSERT INTO `MsgEx` VALUES (DEFAULT,#{mFrom},#{mTo},#{mContent},DEFAULT,#{mStatus})
+    </insert>
+    <select id="getUnread" resultType="User">
+        SELECT u.*,COUNT(m.mFrom) unread FROM `MsgEx` m ,`User` u
+        WHERE m.mTo=#{mTo} AND mStatus=#{mStatus} AND u.uid=m.mFrom GROUP BY m.mFrom
+    </select>
+    <update id="setMsg">
+        UPDATE MsgEx SET mStatus=#{mStatus} WHERE mTo=#{mTo} AND mFrom=#{mFrom}
+    </update>
+</mapper>

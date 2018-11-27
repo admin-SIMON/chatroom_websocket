@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace mapper接口 必填 随便填值 防止SQL语句ID重名-->
+<mapper namespace="com.chatroom_websocket.mapper.UserMapper">
+    <select id="getUserByName" resultType="User">
+        SELECT * FROM `user`
+        WHERE uUsername=#{uUsername}
+    </select>
+    <select id="getUserList" resultType="User">
+        SELECT * FROM `user`
+        WHERE uid!=#{uid}
+    </select>
+</mapper>

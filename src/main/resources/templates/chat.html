@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--创建浏览器客户端-->
+    <!--http：// localhost：8080-->
+    <title>Hello WebSocket</title>
+    <!--此HTML文件导入将用于通过websocket使用STOMP与我们的服务器通信的SockJS和STOMPjavascript库。-->
+    <!--我们还在这里导入一个app.js包含客户端应用程序逻辑的内容-->
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/3.1.0/jquery.js"></script>
+    <script src="/webjars/sockjs-client/1.0.2/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+    <script src="/static/app.js"></script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+<div id="main-content" class="container">
+    <!--<div class="row">-->
+    <!--<div class="col-md-6">-->
+    <!--<form class="form-inline">-->
+    <!--<div class="form-group">-->
+    <!--<label for="connect">建立连接通道 :</label>-->
+    <!--<button id="connect" class="btn btn-default" type="submit">Connect</button>-->
+    <!--<button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--</div>-->
+    <!--<div class="col-md-6">-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="row mt-15 mb-15">
+        <div class="col-md-12">
+            <form class="form-inline">
+                <input type="hidden" id="from" th:value="${user.getUid()}">
+                <div class="col-md-11">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="username">当前用户</label>
+                            <input type="text" id="username" class="form-control" placeholder="我是..."
+                                   th:value="${user.getuUsername()}" disabled="disabled">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="hidden" id="to">
+                            <label for="toName">接收用户</label>
+                            <input type="text" id="toName" class="form-control" placeholder="发送给..."
+                                   disabled="disabled">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="content">消息内容</label>
+                            <input type="text" id="content" class="form-control" placeholder="请输入...">
+                        </div>
+                        <div class="col-md-12">
+                            <button id="send" class="btn btn-default form-control mt-15" type="submit">发送</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <table id="online" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>用户列表</th>
+                </tr>
+                </thead>
+                <tbody id="user">
+                <tr th:each="list:${userList}" th:id="${list.getUid()}">
+                    <td>
+                        <button class="btn btn-default list form-control" type="button" th:text="${list.getuUsername()}"
+                                th:value="${list.getUid()}"></button>
+                    </td>
+                    <td class="count">
+                        <button disabled="disabled" class="btn btn-default list form-control" type="button"
+                                th:if="${unreadList.containsKey(list.getUid())}"
+                                th:text="${unreadList.get(list.getUid())}"></button>
+                        <button disabled="disabled" class="btn btn-default list form-control" type="button"
+                                th:if="${!unreadList.containsKey(list.getUid())}">0
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table id="conversation" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>聊天记录</th>
+                </tr>
+                </thead>
+                <tbody id="greetings">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
