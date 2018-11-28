@@ -6,7 +6,7 @@ public class User {
     private Long uid;
     private String uUsername;
     private String uPassword;
-    private String uImageUrl;
+    private String uImage_Url;
 
     private Integer unread;
 
@@ -34,12 +34,12 @@ public class User {
         this.uPassword = uPassword;
     }
 
-    public String getuImageUrl() {
-        return uImageUrl;
+    public String getuImage_Url() {
+        return uImage_Url;
     }
 
-    public void setuImageUrl(String uImageUrl) {
-        this.uImageUrl = uImageUrl;
+    public void setuImage_Url(String uImage_Url) {
+        this.uImage_Url = uImage_Url;
     }
 
     public Integer getUnread() {
