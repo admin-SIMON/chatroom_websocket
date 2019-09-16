@@ -9,7 +9,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/chatroom?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
-    password: simon
+    password: Simon!!2019
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     database: 7
