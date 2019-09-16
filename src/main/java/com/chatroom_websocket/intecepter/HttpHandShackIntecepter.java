@@ -24,8 +24,8 @@ public class HttpHandShackIntecepter implements HandshakeInterceptor {
         System.out.println("[握手拦截器 beforeHandshake]");
 
         if (request instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest serverHRequest = (ServletServerHttpRequest) request;
-            HttpSession session = serverHRequest.getServletRequest().getSession();
+            ServletServerHttpRequest serverHttpRequest = (ServletServerHttpRequest) request;
+            HttpSession session = serverHttpRequest.getServletRequest().getSession();
             String sessionId = session.getId();
             System.out.println("[握手拦截器 beforeHandshake] sessionId : " + sessionId);
             attributes.put("sessionId", sessionId);
@@ -42,8 +42,8 @@ public class HttpHandShackIntecepter implements HandshakeInterceptor {
                                WebSocketHandler wsHandler, Exception exception) {
         System.out.println("[握手拦截器 afterHandshake]");
         if (request instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest serverHRequest = (ServletServerHttpRequest) request;
-            HttpSession session = serverHRequest.getServletRequest().getSession();
+            ServletServerHttpRequest serverHttpRequest = (ServletServerHttpRequest) request;
+            HttpSession session = serverHttpRequest.getServletRequest().getSession();
             String sessionId = session.getId();
             System.out.println("[握手拦截器 afterHandshake] sessionId : " + sessionId);
         }

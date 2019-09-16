@@ -22,6 +22,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
         return new LoginInterceptor();
     }
 
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration addInterceptor = registry.addInterceptor(getLoginInterceptor());
         //排除的路径

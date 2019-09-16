@@ -44,8 +44,9 @@ public class SocketChannelInterceptor extends ChannelInterceptorAdapter {
                 }
             }
             stringRedisTemplate.opsForList().remove(id, 1, sessionId);
-            if (del)
+            if (del) {
                 stringRedisTemplate.delete(sessionId);
+            }
         }
 //        stringRedisTemplate.delete(id);
     }
@@ -67,7 +68,9 @@ public class SocketChannelInterceptor extends ChannelInterceptorAdapter {
         //消息头访问器
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(message);
 
-        if (null == headerAccessor.getCommand()) return;//过滤非stomp消息类型,例如心跳检测
+        if (null == headerAccessor.getCommand()) {
+            return;//过滤非stomp消息类型,例如心跳检测
+        }
 
         Map<String, Object> attributes = headerAccessor.getSessionAttributes();
 

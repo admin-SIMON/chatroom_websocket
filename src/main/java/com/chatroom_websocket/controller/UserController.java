@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @RequestMapping("/")
-    public ModelAndView Login(User user, ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView login(User user, ModelAndView modelAndView, HttpSession session) {
         modelAndView.setViewName("chat");
         User userByName = userService.getUserByName(user);
         if (null != userByName && userByName.getuPassword().equals(user.getuPassword())) {

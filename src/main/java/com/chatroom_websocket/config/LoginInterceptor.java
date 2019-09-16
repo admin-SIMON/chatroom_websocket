@@ -22,7 +22,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 //        return true;
 
         String sessionId = session.getId();
-        if (redisTemplate.hasKey(sessionId)) return true;
+        if (redisTemplate.hasKey(sessionId)) {
+            return true;
+        }
 
         //跳转到登录页
         response.sendRedirect("/index.html");
