@@ -5,11 +5,11 @@
 <!--namespace mapper接口 必填 随便填值 防止SQL语句ID重名-->
 <mapper namespace="com.chatroom_websocket.mapper.UserMapper">
     <select id="getUserByName" resultType="User">
-        SELECT * FROM `user`
+        SELECT * FROM `User`
         WHERE uUsername=#{uUsername}
     </select>
     <select id="getUserList" resultType="User">
-        SELECT * FROM `user`
+        SELECT * FROM `User`
         WHERE uid!=#{uid}
     </select>
 </mapper>
